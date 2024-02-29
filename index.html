@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Riot&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpg" href="assets/favicon.ico"/>
+    <title>SwishQuiz NBA</title>
+    <meta name="title" content="SwishQuiz NBA" />
+    <meta name="description" content="Challenge your NBA knowledge with 200 questions in our quiz game! Test yourself on players, teams, and iconic moments. Are you the ultimate basketball expert? Play now and find out!" />
+    <link rel="stylesheet" href="index.css">
+    <script type="module" src="index.js"></script>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header__stars">
+            <div class="header__star"></div>
+            <div class="header__star"></div>
+            <div class="header__star"></div>
+            <div class="header__star"></div>
+            <div class="header__star"></div>
+        </div>
+        <h1 class="header__h1">
+            <span class="header__span">SwishQuiz NBA</span>
+            <img src="assets/logo.svg" alt="Logo" class="header__logo">
+        </h1>
+        <div class="header__changer">
+            <input type="checkbox" id="changer">
+            <label for="changer" class="changer"></label>
+        </div>
+    </header>
+
+    <main class="main">
+        <form action="#" id="options">
+            <span class="options__span language">Language</span>
+            <div class="options__language">
+                <input type="radio" name="language" id="english" value="english">
+                <label for="english"></label>
+
+                <input type="radio" name="language" id="spanish" value="spanish">
+                <label for="spanish"></label>
+            </div>
+            <span class="options__error language">Please, select a language</span>
+            <span class="options__span questions">Questions</span>
+            <div class="options__questions">
+                <input type="radio" name="questions" id="10" value="10">
+                <label for="10">10</label>
+
+                <input type="radio" name="questions" id="20" value="20">
+                <label for="20">20</label>
+                
+                <input type="radio" name="questions" id="30" value="30">
+                <label for="30">30</label>
+            </div>
+            <span class="options__error questions">Please, select how many questions</span>
+            <input type="submit" value="Start!">
+        </form>
+
+        <div class="main__stars">
+            <div class="main__star"></div>
+            <div class="main__star"></div>
+            <div class="main__star"></div>
+            <div class="main__star"></div>
+            <div class="main__star"></div>
+        </div>
+        <div class="main__stars right">
+            <div class="main__star"></div>
+            <div class="main__star"></div>
+            <div class="main__star"></div>
+            <div class="main__star"></div>
+            <div class="main__star"></div>
+        </div>
+
+        <div class="panel">
+            <!-- <h1 class="panel__h1">Simple Quiz</h1> -->
+            <div class="panel__quiz">
+                <h2 class="panel__statement"></h2>
+                <div class="panel__answers">
+                    <button class="panel__button"></button>
+                    <button class="panel__button"></button>
+                    <button class="panel__button"></button>
+                    <button class="panel__button"></button>
+                </div>
+                <div class="panel__buttons">
+                    <button class="panel__next"></button>
+                    <button class="panel__home"></button>
+                </div>
+                <span class="panel__clock">10</span>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__stars">
+            <div class="main__star"></div>
+            <div class="main__star"></div>
+            <div class="main__star"></div>
+            <div class="main__star"></div>
+            <div class="main__star"></div>
+        </div>
+        <span class="footer__span">© jaimemunozdev - 2024</span>
+    </footer>
+
+</body>
+</html>
