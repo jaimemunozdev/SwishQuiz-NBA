@@ -11,6 +11,7 @@ const languageLabel = document.querySelectorAll('.options__language label')
 const questionsLabel = document.querySelectorAll('.options__questions label')
 const submitButton = document.querySelector('input[type=submit]')
 
+// Evento change para cambiar el tema entre "original" y "oscuro"
 changer.addEventListener('change', function() {
     if (this.checked) {
         document.body.classList.add('dark')
