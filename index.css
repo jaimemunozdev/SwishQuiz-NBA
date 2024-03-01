@@ -152,12 +152,11 @@ body.dark{
     font-size: 2.25rem;
 }
 .options__language{
-    width: 85%;
+    width: 100%;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 3rem;
 }
 .options__language input[type="radio"] , .options__questions input[type="radio"]{
     display: none;
@@ -174,7 +173,8 @@ body.dark{
     background-repeat: no-repeat;
     opacity: .6;
     cursor: pointer;
-    box-shadow: #838383 .1875rem .1875rem .3125rem;
+    box-shadow: #838383 .1875rem .1875rem .3125rem,
+     #000 inset 0 0 .3125rem;
     transition: opacity .3s ease;
 }
 .options__language label:hover{
@@ -202,16 +202,15 @@ body.dark{
     margin-top: 1.5rem;
 }
 .options__questions{
-    width: 85%;
+    width: 100%;
     display: flex;
     flex-flow: row nowrap;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 3rem;
 }
 .options__questions label{
-    width: calc(100% / 4);
-    width: 7rem;
+    width: 20%;
+    max-width: 7rem;
     padding: 1rem 2rem;
     border: .0625rem solid black;
     border-radius: .3125rem;
@@ -498,19 +497,13 @@ label.dark{
     .options__span{
         font-size: 1.75rem;
     }
-    .options__language{
-        width: 100%;
-        gap: 2rem;
-    }
     .options__language label{
         width: 6rem;
     }
     .options__questions{
-        width: 100%;
-        gap: 2rem;
+        gap: 1.5rem;
     }
     .options__questions label{
-        width: auto;
         min-width: 2rem;
         min-height: 2rem;
     }
