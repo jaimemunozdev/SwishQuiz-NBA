@@ -413,7 +413,7 @@ label.dark{
     text-align: center;
 }
 
-@media (max-width: 960px){
+@media (width < 960px){
     .header{
         padding: 1.5rem 2.5rem;
     }
@@ -431,7 +431,7 @@ label.dark{
         height: 3.5rem;
     }
 }
-@media (max-width: 805px){
+@media (width < 805px){
     .header{
         justify-content: flex-end;
     }
@@ -463,7 +463,7 @@ label.dark{
         margin-bottom: 1rem;
     }
 }
-@media (max-width: 640px){
+@media (width < 640px){
     .header__h1{
         width: 100%;
     }
@@ -488,7 +488,7 @@ label.dark{
         width: 90%;
     }
 }
-@media (max-width: 480px){
+@media (width < 480px){
     .header__span{
         font-size: 2rem;
     }
@@ -516,6 +516,13 @@ label.dark{
     }
     .panel__statement{
         font-size: 1.25rem;
+    }
+    .panel__buttons{
+        justify-content: space-between;
+    }
+    .panel__buttons button{
+        width: 42.5%;
+        padding: 0.75rem;
     }
     .panel__clock{
         font-size: 2rem;
