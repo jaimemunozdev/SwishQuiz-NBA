@@ -338,6 +338,7 @@ label.dark{
     justify-content: space-evenly;
 }
 .panel__next , .panel__home{
+    width: 40%;
     background-color: #C8102E;
     color: #fff;
     padding: .75rem 1.25rem;
@@ -511,10 +512,10 @@ label.dark{
         font-size: 1.25rem;
     }
     .panel__buttons{
-        justify-content: space-between;
+        justify-content: center;
+        gap: 1.25rem;
     }
-    .panel__buttons button{
-        width: 42.5%;
+    .panel__next , .panel__home{
         padding: 0.75rem;
     }
     .panel__clock{
