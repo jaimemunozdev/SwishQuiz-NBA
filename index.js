@@ -68,7 +68,7 @@ let questionsNumber = options.questions
 const errorLanguage = document.querySelector('.options__error.language')
 const errorQuestions = document.querySelector('.options__error.questions')
 const panel = document.querySelector('.panel')
-let selectedLanguage = 'english'
+let selectedLanguage
 const spanish = document.querySelector('#spanish')
 const english = document.querySelector('#english')
 const languageSpan = document.querySelector('.options__span.language')
@@ -98,10 +98,8 @@ english.addEventListener('change' , () => {
 function checkLanguage(){
     if(language.value == '' || language.value == null){
         errorLanguage.style.display = "block"
-        return false
     } else{
         selectedLanguage = language.value
-        return true
     }
 }
 
@@ -109,9 +107,6 @@ function checkLanguage(){
 function checkQuestions(){
     if(questionsNumber.value == '' || questionsNumber.value == null){
         errorQuestions.style.display = "block"
-        return false
-    } else{
-        return true
     }
 }
 
@@ -119,6 +114,23 @@ function checkQuestions(){
 function getQuestions(language){
     return language === 'english' ? questions : preguntas
 }
+
+// Evento 'submit' del formulario Options, evita la recarga de la página, comprueba que se ha completado el formulario y con qué opciones, si se ha completado correctamente, ejecuta la función de iniciar el juego
+options.addEventListener('submit', (e) => {
+    e.preventDefault()
+    errorLanguage.style.display = "none"
+    errorQuestions.style.display = "none"
+    checkLanguage()
+    checkQuestions()
+    
+    if (language.value !== '' && questionsNumber.value !== '') {
+        startQuiz()
+    }
+})
+
+let currentQuestionIndex
+let score
+let questionsShown
 
 // Función que realiza algunos cambios en el DOM necesarios para iniciar el juego, "baraja" las preguntas, y muestra la primera pregunta
 function startQuiz(){
@@ -139,67 +151,8 @@ function startQuiz(){
     showQuestion()
 }
 
-// Evento 'submit' del formulario Options, evita la recarga de la página, comprueba que se ha completado el formulario y con qué opctiones, si se ha completado correctamente, ejecuta la función de iniciar el juego
-options.addEventListener('submit', (e) => {
-    e.preventDefault()
-    errorLanguage.style.display = "none"
-    errorQuestions.style.display = "none"
-    checkLanguage()
-    checkQuestions()
-    
-    if (language.value !== '' && questionsNumber.value !== '') {
-        startQuiz()
-    }
-})
-
-const statement = document.querySelector('.panel__statement')
-const answerButtons = document.querySelector('.panel__answers')
-const nextButton = document.querySelector('.panel__next')
-const homeButton = document.querySelector('.panel__home')
-
-let currentQuestionIndex = 0
-let score = 0
-let questionsShown = 0
-let timeLeft = 14 
-let timerInterval
-let clock = document.querySelector('.panel__clock')
-
-
-// Función que ejecuta la cuenta regresiva que supondrá el tiempo que el jugador tiene para responder a la pregunta, mostrándolo en el reloj situado en el Panel de juego
-function countdown(){
-    timeLeft = 14
-    timerInterval = setInterval(updateTimer , 1000)
-    document.querySelector('.panel__clock').textContent = timeLeft
-    updateTimer()
-}
-
-// Función que actualiza el tiempo que le queda al jugador para responder a la pregunta, cuando el tiempo llegue a 0, detendrá el intervalo, ejecutará la función que desactiva los botones y cambiará el borde del Panel de juego para hacer más notorio que acabó el tiempo
-function updateTimer(){
-    const formattedClock = timeLeft.toString().padStart(2 , '0')
-    clock.textContent = formattedClock
-    timeLeft--
-    if(clock.textContent == '00'){
-        clearInterval(timerInterval)
-        disableButtons()
-        panel.style.boxShadow = '0 0 0 .5rem #C8102E'
-    }
-}
-
-// Función que desactiva los botones al acabar el tiempo y muestra la respuesta correcta
-function disableButtons() {
-    Array.from(answerButtons.children).forEach(button => {
-        if(button.dataset.correct === 'true'){
-            button.classList.add('correct')
-        }
-        button.disabled = true
-    })
-
-    nextButton.style.opacity = '1'
-    nextButton.style.pointerEvents = 'auto'
-}
-
 // Función que comprueba si quedan preguntas por mostrar (y finaliza el juego si es negativo), muestra la siguiente pregunta según el idioma elegido, "baraja" las posibles respuestas para que no siempre se muestren en el mismo orden, muestra en el Panel de juego el Enunciado de la pregunta y crea los botones que se corresponderán con las posibles respuestas (recogiendo cuál es la correcta) e inicia la cuenta atrás
-function showQuestion() {
+function showQuestion(){
     if (questionsShown === parseInt(questionsNumber.value)) {
         showScore()
         return
@@ -224,8 +177,49 @@ function showQuestion() {
             button.dataset.correct = answer.correct
         }
     })
-
     countdown()
+}
+
+const statement = document.querySelector('.panel__statement')
+const answerButtons = document.querySelector('.panel__answers')
+const nextButton = document.querySelector('.panel__next')
+const homeButton = document.querySelector('.panel__home')
+const clock = document.querySelector('.panel__clock')
+
+let timeLeft 
+let timerInterval
+
+
+// Función que ejecuta la cuenta regresiva que supondrá el tiempo que el jugador tiene para responder a la pregunta, mostrándolo en el reloj situado en el Panel de juego
+function countdown(){
+    timeLeft = 14
+    timerInterval = setInterval(updateTimer , 1000)
+    clock.textContent = timeLeft
+    updateTimer()
+}
+
+// Función que actualiza el tiempo que le queda al jugador para responder a la pregunta, cuando el tiempo llegue a 0, detendrá el intervalo, ejecutará la función que desactiva los botones y cambiará el borde del Panel de juego para hacer más notorio que acabó el tiempo
+function updateTimer(){
+    const formattedClock = timeLeft.toString().padStart(2 , '0')
+    clock.textContent = formattedClock
+    timeLeft--
+    if(clock.textContent == '00'){
+        clearInterval(timerInterval)
+        disableButtons()
+        panel.style.boxShadow = '0 0 0 .5rem #C8102E'
+    }
+}
+
+// Función que desactiva los botones al acabar el tiempo y muestra la respuesta correcta
+function disableButtons(){
+    Array.from(answerButtons.children).forEach(button => {
+        if(button.dataset.correct === 'true'){
+            button.classList.add('correct')
+        }
+        button.disabled = true
+    })
+    nextButton.style.opacity = '1'
+    nextButton.style.pointerEvents = 'auto'
 }
 
 // Función que restablece el estado del Panel de juego y sus botones, y recoge el dato de que se ha mostrado una pregunta más
@@ -241,9 +235,8 @@ function resetState(){
 // Función que recoge los sucesos tras elegir una respuesta: comprobar si es verdadera (y si es así, sumar un punto), mostrarnos si la respuesta que elegimos era correcta o incorrecta mediante adición de clase, y en caso de que sea incorrecta, mostrarnos la correcta y deshabilitar los botones; y por último, detener el intervalo de tiempo de la cuenta atrás
 function selectAnswer(e){
     const selectedBtn = e.target
-    const isCorrect = selectedBtn.dataset.correct === 'true'
-                          
-    if(isCorrect){
+                            
+    if(selectedBtn.dataset.correct){
         selectedBtn.classList.add('correct')
         score++
     }else{
@@ -251,7 +244,7 @@ function selectAnswer(e){
     }
 
     Array.from(answerButtons.children).forEach(button => {
-        if(button.dataset.correct === 'true'){
+        if(button.dataset.correct){
             button.classList.add('correct')
         }
         button.disabled = true

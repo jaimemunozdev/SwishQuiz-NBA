@@ -830,8 +830,8 @@ const questions = [
         question: 'In which of these countries was Joel Embiid born?',
         answers: [
             {text: 'Francia', correct: false},
-            {text: 'Camerún', correct: true},
-            {text: 'Estados Unidos', correct: false},
+            {text: 'Cameroon', correct: true},
+            {text: 'United States', correct: false},
             {text: 'Nigeria', correct: false}
         ]
     },
