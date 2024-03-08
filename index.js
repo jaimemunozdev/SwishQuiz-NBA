@@ -213,7 +213,7 @@ function updateTimer(){
 // Función que desactiva los botones al acabar el tiempo y muestra la respuesta correcta
 function disableButtons(){
     Array.from(answerButtons.children).forEach(button => {
-        if(button.dataset.correct === 'true'){
+        if(button.dataset.correct){
             button.classList.add('correct')
         }
         button.disabled = true
@@ -235,7 +235,7 @@ function resetState(){
 // Función que recoge los sucesos tras elegir una respuesta: comprobar si es verdadera (y si es así, sumar un punto), mostrarnos si la respuesta que elegimos era correcta o incorrecta mediante adición de clase, y en caso de que sea incorrecta, mostrarnos la correcta y deshabilitar los botones; y por último, detener el intervalo de tiempo de la cuenta atrás
 function selectAnswer(e){
     const selectedBtn = e.target
-                            
+
     if(selectedBtn.dataset.correct){
         selectedBtn.classList.add('correct')
         score++
